@@ -1,5 +1,4 @@
 import requests
-import argparse
 
 
 def fetch_github_user_activity(username):
@@ -53,26 +52,3 @@ def fetch_github_user_activity(username):
                 print(event_messages[event_type](event))
             except KeyError as e:
                 print(f"Missing key in event data: {e}")
-
-
-def main():
-    parser = argparse.ArgumentParser(description="Fetch GitHub user activity")
-    parser.add_argument(
-        "command",
-        choices=["github-activity"],
-        help="Command to execute",
-    )
-    parser.add_argument("username", help="GitHub username")
-
-    if len(vars(parser.parse_args())) == 0:
-        parser.print_help()
-        return
-
-    args = parser.parse_args()
-
-    if args.command == "github-activity":
-        fetch_github_user_activity(args.username)
-
-
-if __name__ == "__main__":
-    main()
